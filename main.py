@@ -44,7 +44,8 @@ def generate_wordcloud():
     #
     # # The pil way (if you don't have matplotlib)
     image = wordcloud.to_image()
-    return (image)
+    image.save("Image.jpg")
+    #return (image)
     # return "hello"
 
 if __name__ == "__main__":
