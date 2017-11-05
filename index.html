@@ -15,41 +15,47 @@
 
 <body>
   <div class="container">
-    <div class="jumbotron" align="center">
-    <div class="bgimg">
-        <div class="container text-center" style="color:Black">
-            <h1>Professor Review Summarizer</h1>
-        </div>
+    <div class="jumbotron">
+      <div class="bgimg">
+          <div class="container text-center" style="color:Black">
+              <h2>Professor Review Summarizer</h2>
+          </div>
+      </div>
+      <div align="center">
+          <div class="row" style="margin-bottom:10px">
+              <div class="col-md-6" style="margin-right:10px; border-radius:25px; height:300px; width:400px; background:#7FFFD4">
+                  <label>Description</label>
+                  <br>
+                      <p>
+                        A new way for Penn State Professors to better understand and interpret the feedback given
+                        from student's SRTEs.
+                      </p>
+                  </br>
+              </div>
+              <div class="col-md-6" style="border-radius:25px; height:300px; width:400px; background:#7FFFD4">
+                  <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Professors
+                  <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                          <li><a href="#" onclick="get_wordcloud('mcdaniel_review')">Patrick McDaniel</a></li>
+                          <li><a href="#" onclick="get_wordcloud('danfeng_review')" >Danfeng Zhang</a></li>
+                          <li><a href="#" onclick="get_wordcloud('quick_review')">Susan Quick</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6" style="margin-right:10px; border-radius:25px; height:300px; width:400px; background:#7FFFD4">
+                  <label>Word Cloud</label>
+                  <br></br>
+                  <img src="" alt="">
+              </div>
+              <div class="col-md-6" style="border-radius:25px; height:300px; width:400px; background:#7FFFD4">
+                  <label>IBM Watson Sentiment</label>
+              </div>
+          </div>
+      </div>
     </div>
-    <div align="center">
-        <div class="row">
-            <div class="col-md-6" style="height:300px; width:400px; background:#7FFFD4">
-                <label>Description</label>
-            </div>
-            <div class="col-md-6" style="height:300px; width:400px; background:#7FFFD4">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Professors
-                <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onclick="get_wordcloud('mcdaniel_review')">Patrick McDaniel</a></li>
-                        <li><a href="#" onclick="get_wordcloud('danfeng_review')" >Danfeng Zhang</a></li>
-                        <li><a href="#" onclick="get_wordcloud('quick_review')">Susan Quick</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6" style="height:300px; width:400px; background:#7FFFD4">
-                <label>Word Cloud</label>
-                <br></br>
-                <img src="" alt="wordcloud image">
-            </div>
-            <div class="col-md-6" style="height:300px; width:400px; background:#7FFFD4">
-                <label>IBM Watson Sentiment</label>
-            </div>
-        </div>
-    </div>
-  </div>
   </div>
 
     <script type="text/javascript">
