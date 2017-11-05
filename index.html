@@ -34,7 +34,7 @@
                         <li><a href="#" onclick="get_wordcloud('danfeng_review')" >Danfeng Zhang</a></li>
                         <li><a href="#" >Susan Quick</a></li>
                     </ul>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/EverestfromKalarPatarcrop.JPG" alt="wordcloud image">
+                    <img id="wordcloud_image" src="" alt="wordcloud image">
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
     <script type="text/javascript">
         function get_wordcloud(filename) {
             let myHeaders = new Headers();
-            const myImage = document.querySelector('img');
+            const myImage = document.getElementById('wordcloud_image');
 
             const myInit = {
                 method: 'GET',
