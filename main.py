@@ -4,6 +4,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import pdb
 
 app = Flask(__name__)
 
@@ -13,6 +14,7 @@ def index():
 
 @app.route('/generate_wordcloud', methods=['POST'])
 def generate_wordcloud():
+    pdb.set_trace()
     d = path.dirname(__file__)
 
     # Read the whole text.
