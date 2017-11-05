@@ -15,15 +15,34 @@
 <script type="text/javascript">
 function get_wordcloud(txtFile)
 {
-    //call python generate_wordcloud.py
-    $.ajax({
-      type: "POST",
-      url: "~/generate_wordcloud.py",
-      data: { param: txtFile}
-    }).done(function( o ) {
-       //o should hopefully be the image
+  let myHeaders = new Headers();
+  const myImage = document.querySelector('img');
 
-    });
+  const myInit = { method: 'GET',
+  headers: myHeaders,
+  mode: 'no-cors',
+  cache: 'default' };
+
+  var myRequest = new Request('http://127.0.0.1:5000/generateWordCloud', myInit);
+
+  // fetch(myRequest).then(function(response) {
+  //   console.log(response);
+  //   console.log(response.blob);
+  //   return response.blob();
+  // }).then(function(myBlob) {
+  //   console.log(myBlob);
+  //   var objectURL = URL.createObjectURL(myBlob);
+  //   myImage.src = objectURL;
+  //   console.log(myImage.src);
+  //   console.log(objectURL);
+  // });
+
+  fetch(myRequest).then( function(response) {
+        return response.json();
+      }).then( function(jsonData) {
+        console.log(jsonData);
+      });
+      // .catch( error => console.log(error));
 }
 </script>
 
@@ -48,6 +67,7 @@ function get_wordcloud(txtFile)
                   <li><a href="#" onclick=get_wordcloud("danfeng_review.txt")>Danfeng Zhang</a></li>
                   <li><a href="#" onclick=get_wordcloud("quick_review.txt")>Susan Quick</a></li>
                 </ul>
+                <img src="">
             </div>
         </div>
     </div>

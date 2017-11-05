@@ -21,12 +21,25 @@ def generate_wordcloud(filename):
     # plt.axis("off")
 
     # lower max_font_size
+    # wordcloud = WordCloud(max_font_size=40).generate(text)
+    # plt.figure()
+    # # plt.imshow(wordcloud, interpolation="bilinear")
+    # plt.axis("off")
+    # # plt.show()
+
+    # # The pil way (if you don't have matplotlib)
+    # image = wordcloud.to_image()
+    # return image
+
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+
+    # lower max_font_size
     wordcloud = WordCloud(max_font_size=40).generate(text)
     plt.figure()
-    # plt.imshow(wordcloud, interpolation="bilinear")
+    plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
-    # plt.show()
+    print("here")
+    plt.show()
 
-    # The pil way (if you don't have matplotlib)
-    image = wordcloud.to_image()
-    return image
+generate_wordcloud("mcdaniel_review.txt")
