@@ -76,18 +76,6 @@
                 dataType: 'json'
             });
 
-            // fetch(myRequest).then(function(response) {
-            //   console.log(response);
-            //   console.log(response.blob);
-            //   return response.blob();
-            // }).then(function(myBlob) {
-            //   console.log(myBlob);
-            //   var objectURL = URL.createObjectURL(myBlob);
-            //   myImage.src = objectURL;
-            //   console.log(myImage.src);
-            //   console.log(objectURL);
-            // });
-
             fetch('http://127.0.0.1:5000/generateWordCloud?filename=' + filename, {
                     method: 'GET',
                     mode: 'cors',
