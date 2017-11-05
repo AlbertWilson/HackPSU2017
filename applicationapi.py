@@ -57,7 +57,7 @@ def generate_wordcloud():
 			'response_code': 'error'
 			})
 
-def create_pie_chart(emotions_dict):
+def create_pie_chart(emotions_dict, filename):
     labels = []
     sizes = []
     for k,v in emotions_dict.iteritems():
@@ -68,7 +68,7 @@ def create_pie_chart(emotions_dict):
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, explode=None, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
     ax1.axis('equal')
-    fig1.savefig("piechart.png")
+    fig1.savefig(filename + ".png")
 
 @application.route('/classifyText')
 def classifyText():
@@ -124,10 +124,11 @@ def classifyText():
 		for emotion in emotions_dict.keys():
 		    emotions_dict[emotion] = emotions_dict[emotion]/norm
 
-		create_pie_chart(emotions_dict)
+		create_pie_chart(emotions_dict, filename)
 
 		return jsonify({
-			'classified_text': final_string
+			'classified_text': final_string,
+			'piechart' : filename + '.png'
 			})
 
 	except:

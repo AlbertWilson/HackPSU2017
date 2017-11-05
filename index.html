@@ -42,13 +42,14 @@
                           <li><a href="#" onclick="get_wordcloud('quick_review')">Susan Quick</a></li>
                       </ul>
                   </div>
+                  <img id='piechart' src="" alt="" style="width: 300px;height: 200px;">
               </div>
           </div>
           <div class="row">
               <div class="col-md-6" style="margin-right:10px; border-radius:25px; height:300px; width:400px; background:#7FFFD4">
                   <label>Word Cloud</label>
                   <br></br>
-                  <img src="" alt="">
+                  <img id='wordcloudimage' src="" alt="">
               </div>
               <div class="col-md-6" style="border-radius:25px; height:300px; width:400px; background:#7FFFD4">
                   <label>IBM Watson Sentiment</label>
@@ -62,7 +63,7 @@
     <script type="text/javascript">
         function get_wordcloud(filename) {
             let myHeaders = new Headers();
-            const myImage = document.querySelector('img');
+            const myImage = document.getElementById('wordcloudimage');
 
             const myInit = {
                 method: 'GET',
@@ -94,6 +95,7 @@
             // .catch( error => console.log(error));
         }
         function classify_text(filename) {
+            var piechart = document.getElementById('piechart')
             let myHeaders = new Headers();
             const myTextBox = document.getElementById('result');
             const myInit = {
@@ -111,7 +113,9 @@
                 .then(r => {
                     console.log(r);
                     console.log(r.classified_text);
+                    console.log(r.piechart);
                     myTextBox.value = r.classified_text;
+                    piechart.src = r.piechart;
                     console.log(myTextBox.value);
                 })
                 .catch( error => console.log(error));
