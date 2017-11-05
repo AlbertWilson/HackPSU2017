@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 application = Flask(__name__)
+CORS(application)
 
 @application.route('/')
 def index():
@@ -13,10 +15,9 @@ from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 
 @application.route('/generateWordCloud')
-def generate_wordcloud():
+def generate_wordcloud(filename):
 	try:
 		# filename = request.args.get('filename')
-		filename = 'mcdaniel_review.txt'
 		d = path.dirname(__file__)
 	    # Read the whole text.
 		text = open(path.join(d, filename), 'r').read()
