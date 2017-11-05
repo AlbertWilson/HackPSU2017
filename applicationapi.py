@@ -15,12 +15,14 @@ from tempfile import NamedTemporaryFile
 from shutil import copyfileobj
 
 @application.route('/generateWordCloud')
-def generate_wordcloud(filename):
+def generate_wordcloud():
 	try:
-		# filename = request.args.get('filename')
+		filename = request.args.get('filename')
+		textfilename = filename + '.txt'
+		print(filename)
 		d = path.dirname(__file__)
 	    # Read the whole text.
-		text = open(path.join(d, filename), 'r').read()
+		text = open(path.join(d, textfilename), 'r').read()
 		# Generate a word cloud image
 		wordcloud = WordCloud().generate(text)
 
@@ -38,11 +40,12 @@ def generate_wordcloud(filename):
 		# plt.show()
 
 		# The pil way (if you don't have matplotlib)
-		image = wordcloud.to_file("mcDaniels.jpg")
+		imagename = filename + '.jpg'
+		image = wordcloud.to_file(imagename)
 
 		# response = send_file(tempFileObj, as_attachment=True, attachment_filename='mcDaniels.jpg')
 		return jsonify({
-			'image_name': 'mcDaniels.jpg'
+			'image_name': imagename
 			})
 
 	except:
