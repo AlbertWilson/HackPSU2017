@@ -106,9 +106,15 @@ def classifyText():
 		    )
 		  ]
 		)
+<<<<<<< HEAD
 		a = response['keywords'][0]['text'] + " with a " + response['keywords'][0]['sentiment']['label'] + " sentiment."
 		b = response['keywords'][1]['text'] + " with a " + response['keywords'][1]['sentiment']['label'] + " sentiment."
 		c = response['keywords'][2]['text'] + " with a " + response['keywords'][2]['sentiment']['label'] + " sentiment."
+=======
+		a = response['keywords'][0]['text'] + " - " + response['keywords'][0]['sentiment']['label'] + " sentiment."
+		b = response['keywords'][1]['text'] + " - " + response['keywords'][1]['sentiment']['label'] + " sentiment."
+		c = response['keywords'][2]['text'] + " - " + response['keywords'][2]['sentiment']['label'] + " sentiment."
+>>>>>>> 5cd53ffd8dda595be0c20685dad3f0f901e2a11f
 		# #
 		final_string = a + b + c
 		# final_string = "Hello"
