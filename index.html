@@ -30,11 +30,12 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Professors
                 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="get_wordcloud('mcdaniel_review')">Patrick McDaniel</a></li>
-                        <li><a href="#" onclick="get_wordcloud('danfeng_review')" >Danfeng Zhang</a></li>
+                        <li><a href="#" onclick="get_wordcloud('mcdaniel_review'); classify_text('mcdaniel_review')">Patrick McDaniel</a></li>
+                        <li><a href="#" onclick="get_wordcloud('danfeng_review'); classify_text('danfeng_review')" >Danfeng Zhang</a></li>
                         <li><a href="#" >Susan Quick</a></li>
                     </ul>
-                    <img id="wordcloud_image" src="" alt="wordcloud image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/EverestfromKalarPatarcrop.JPG" alt="wordcloud image">
+                    <output id="result" style="color:green; font-family:courier new; font-size:300%; width:200px;height:200px;padding:20px">Output from Watson NLU...</output>
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
     <script type="text/javascript">
         function get_wordcloud(filename) {
             let myHeaders = new Headers();
-            const myImage = document.getElementById('wordcloud_image');
+            const myImage = document.querySelector('img');
 
             const myInit = {
                 method: 'GET',
@@ -71,6 +72,31 @@
                     console.log(r.image_name);
                     myImage.src = r.image_name;
                     console.log(myImage.src);
+                })
+                .catch( error => console.log(error));
+        }
+        function classify_text(filename) {
+            let myHeaders = new Headers();
+            const myTextBox = document.getElementById('result');
+
+            const myInit = {
+                method: 'GET',
+                headers: myHeaders,
+                mode: 'no-cors',
+                cache: 'default'
+            };
+
+            fetch('http://127.0.0.1:5000/classifyText?filename=' + filename, {
+                    method: 'GET',
+                    mode: 'cors',
+                    dataType: 'json'
+                })
+                .then((r) => r.json())
+                .then(r => {
+                    console.log(r);
+                    console.log(r.classified_text);
+                    myTextBox.value = r.classified_text;
+                    console.log(myTextBox.value);
                 })
                 .catch( error => console.log(error));
         }
