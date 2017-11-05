@@ -7,12 +7,11 @@ from os import path
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-
-def generate_wordcloud():
+def generate_wordcloud(filename):
     d = path.dirname(__file__)
 
     # Read the whole text.
-    text = open(path.join(d, 'review.txt')).read()
+    text = open(path.join(d, filename)).read()
     # Generate a word cloud image
     wordcloud = WordCloud().generate(text)
 
@@ -31,6 +30,3 @@ def generate_wordcloud():
     # The pil way (if you don't have matplotlib)
     image = wordcloud.to_image()
     return image
-    # image.show()
-
-generate_wordcloud()
