@@ -26,7 +26,7 @@ def generate_wordcloud():
     d = path.dirname(__file__)
 
     # Read the whole text.
-    text = open(path.join(d, "Patrick McDaniel.txt")).read()
+    text = open(path.join(d, "mcdaniel_review.txt")).read()
     # Generate a word cloud image
     wordcloud = WordCloud().generate(text)
 
@@ -40,13 +40,11 @@ def generate_wordcloud():
     plt.figure()
     # # plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
-    # # plt.show()
+    # plt.show()
     #
     # # The pil way (if you don't have matplotlib)
     image = wordcloud.to_image()
-    image.save("Image.jpg")
-    #return (image)
-    # return "hello"
+    image.save('mcdaniel_review.jpg')
 
 if __name__ == "__main__":
     app.run(debug=True)
