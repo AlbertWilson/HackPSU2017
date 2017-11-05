@@ -3,6 +3,7 @@ from flask_cors import CORS
 import json
 from watson_developer_cloud import NaturalLanguageUnderstandingV1
 import watson_developer_cloud.natural_language_understanding.features.v1 as Features
+import matplotlib.pyplot as plt
 
 application = Flask(__name__)
 CORS(application)
@@ -56,6 +57,20 @@ def generate_wordcloud():
 			'response_code': 'error'
 			})
 
+def create_pie_chart(emotions_dict):
+    labels = []
+    sizes = []
+    for k,v in emotions_dict.iteritems():
+        labels.append(k)
+        sizes.append(v)
+    explode = (0,0,0,0)
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=None, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax1.axis('equal')
+    fig1.savefig("piechart.png")
+    # plt.show()
+
 @application.route('/classifyText')
 def classifyText():
 
@@ -82,20 +97,43 @@ def classifyText():
 		    Features.Entities(
 		      emotion=True,
 		      sentiment=True,
-		      limit=2
+		      limit=3
 		    ),
 		    Features.Keywords(
 		      emotion=True,
 		      sentiment=True,
-		      limit=2
+		      limit=3
 		    )
 		  ]
 		)
-		json_response = response
-		print json_response
-		final_string = json.dumps(response)
+		a = response['keywords'][0]['text'] + " - " + response['keywords'][0]['sentiment']['label'] + " sentiment."
+		b = response['keywords'][1]['text'] + " - " + response['keywords'][1]['sentiment']['label'] + " sentiment."
+		c = response['keywords'][2]['text'] + " - " + response['keywords'][2]['sentiment']['label'] + " sentiment."
+		# #
+		final_string = a + b + c
+		# final_string = "Hello"
+		# print final_string
+		# print final_string
 		# return jsonify(result = str(final_string))
 		# return jsonify(result = str(final_string))
+		emotions = {'anger', 'joy', 'sadness', 'fear', 'disgust'}
+		emotions_dict = {}
+
+		for emotion in emotions:
+		    emotions_dict[emotion] = 0
+		    for i in range(3):
+		        emotions_dict[emotion] += response['keywords'][i]['emotion'][emotion]
+
+		norm = 0
+		for emotion in emotions_dict.keys():
+		    norm += emotions_dict[emotion]
+
+		for emotion in emotions_dict.keys():
+		    emotions_dict[emotion] = emotions_dict[emotion]/norm
+		# print emotions_dict
+
+		create_pie_chart(emotions_dict)
+
 		return jsonify({
 			'classified_text': final_string
 			})
