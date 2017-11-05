@@ -13,16 +13,19 @@
 </head>
 
 <script type="text/javascript">
-function get_wordcloud(txtFile)
+function get_wordcloud()
 {
-    //call python generate_wordcloud.py
-    $.ajax({
-      type: "POST",
-      url: "~/generate_wordcloud.py",
-      data: { param: txtFile}
-    }).done(function( o ) {
-       //o should hopefully be the image
+    $('ul li').click(function(){
+       var value = $(this).text();
+       var index = $('li').index($(this));
 
+       $.ajax({
+         type: "POST",
+         url: "generate_wordcloud",
+         success: function(resp){
+           console.log(resp.width)
+       }
+     });
     });
 }
 </script>
@@ -44,9 +47,9 @@ function get_wordcloud(txtFile)
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Professors
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a href="#" onclick=get_wordcloud("mcdaniel_review.txt")>Patrick McDaniel</a></li>
-                  <li><a href="#" onclick=get_wordcloud("danfeng_review.txt")>Danfeng Zhang</a></li>
-                  <li><a href="#" onclick=get_wordcloud("quick_review.txt")>Susan Quick</a></li>
+                  <li><a href="#" onclick=get_wordcloud() value="mcdaniel_review.txt">Patrick McDaniel</a></li>
+                  <li><a href="#" onclick=get_wordcloud() value="danfeng_review.txt">Danfeng Zhang</a></li>
+                  <li><a href="#" onclick=get_wordcloud() value="quick_review.txt">Susan Quick</a></li>
                 </ul>
             </div>
         </div>
